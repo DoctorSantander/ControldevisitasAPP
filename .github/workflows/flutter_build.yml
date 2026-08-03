@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ControldevisitasAPP
+
     steps:
       - name: Clonar Repositorio
         uses: actions/checkout@v4
@@ -32,11 +36,11 @@ jobs:
       - name: Instalar Dependencias
         run: flutter pub get
 
-      - name: Construir APK (Release con Verbose para depurar si falla)
-        run: flutter build apk --release --verbose
+      - name: Construir APK (Release)
+        run: flutter build apk --release
 
       - name: Subir APK como Artifact (Descargable)
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: ControldevisitasAPP/build/app/outputs/flutter-apk/app-release.apk
